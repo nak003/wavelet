@@ -23,9 +23,11 @@ class Handler implements URLHandler {
                 }
 
                 if (result.size()!=0){
-                    for (int j = 0; j < list.size(); j++){
-                        
-                        return result.get(j);
+                    int notprinted = 0; 
+                    while (notprinted!=0){
+                        for (int j=0; j <result.size()-1; j++){
+                            return result.get(j);
+                        }
                     }
                 }
 

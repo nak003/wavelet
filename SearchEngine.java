@@ -2,7 +2,7 @@ import java.io.IOException;
 import java.net.URI;
 import java.util.ArrayList;
 
-class Handler implements URLHandler {
+class SearchHandler implements URLHandler {
     // The one bit of state on the server: string can be added and searched by
     // various requests.
     ArrayList <String> list = new ArrayList<String>();
@@ -23,12 +23,17 @@ class Handler implements URLHandler {
                 }
 
                 if (result.size()!=0){
-                    int notprinted = 0; 
-                    while (notprinted!=0){
-                        for (int j=0; j <result.size()-1; j++){
-                            return result.get(j);
+                    /* 
+                    int notprinted = result.size(); 
+                    int x=0;
+                    for (int j =0; j< result.size(); j++ ){
+                        x += 1;
+                        while (notprinted!=0){
+                            notprinted -=1; 
+                            return result.get(x);
                         }
                     }
+                   */
                 }
 
                 else {

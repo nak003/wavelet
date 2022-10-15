@@ -12,30 +12,22 @@ class SearchHandler implements URLHandler {
         if (parameters[0].equals("s")) {
             if (url.getPath().contains("/add")) {
                 list.add(parameters[1]);
-                return parameters[1] + "is now added to search engine";
+                return parameters[1] + " is now added to search engine";
             }
             if (url.getPath().contains("search")){
-                ArrayList <String> result = new ArrayList<String>();
+                ArrayList <String> resultList = new ArrayList<String>();
                 for (int i = 0; i < list.size(); i++){
                     if (list.get(i).contains(parameters[1])){
-                        result.add(list.get(i));
+                        resultList.add(list.get(i));
                     }
                 }
 
-                if (result.size()!=0){
-                    /* 
-                    int notprinted = result.size(); 
-                    int x=0;
-                    for (int j =0; j< result.size(); j++ ){
-                        x += 1;
-                        while (notprinted!=0){
-                            notprinted -=1; 
-                            return result.get(x);
-                        }
-                    }
-                   */
+                if (resultList.size()!=0){
+                    String result;
+                    result = returnArrayList(resultList);
+                    return result; 
                 }
-
+                
                 else {
                     return "No words in search engine with " + parameters[1];
                 }
@@ -43,7 +35,16 @@ class SearchHandler implements URLHandler {
         }
         return "404 Not Found!";
     }
+
+    public String returnArrayList(ArrayList<String> list){
+        String result = "";
+        for (int i=0; i<list.size();i++){
+            result = result + list.get(i) + " ";
+        }
+        return result; 
+    }
 }
+
 
 class SearchEngine {
     public static void main(String[] args) throws IOException {
@@ -54,6 +55,6 @@ class SearchEngine {
 
         int port = Integer.parseInt(args[0]);
 
-        Server.start(port, new Handler());
+        Server.start(port, new SearchHandler());
     }
 }
